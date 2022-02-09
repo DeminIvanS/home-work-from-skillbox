@@ -1,19 +1,27 @@
 
 public class Arithmetic {
+    private int x;
+    private int y;
     private int sum = 0;
     private int multiply = 0;
     private int max = 0;
     private int min = 0;
 
-    public void sum(int x, int y) {
+    public Arithmetic(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+
+    public void getSum() {
         sum = x + y;
     }
 
-    public void multiply(int x, int y) {
+    public void multiply() {
         multiply = x * y;
     }
 
-    public void getMaxMin(int x, int y) {
+    public void getMaxMin() {
 
         if (x < y) {
             max = y;
