@@ -13,7 +13,7 @@ public class Arithmetic {
     }
 
 
-    public void getSum() {
+    public void sum() {
         sum = x + y;
     }
 

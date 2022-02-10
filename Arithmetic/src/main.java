@@ -3,7 +3,7 @@ public class main {
 
         Arithmetic arithmetic = new Arithmetic(5,6);
 
-        arithmetic.getSum();
+        arithmetic.sum();
         arithmetic.multiply();
         arithmetic.getMaxMin();
 

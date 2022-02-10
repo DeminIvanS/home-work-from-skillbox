@@ -5,6 +5,10 @@ public class Main {
         basket.add("Молоко", 40, 2);
         basket.add("Coffee", 400, 1,0.5);
         basket.add("Лопата",300,2,2);
+        basket.clear();
+        basket.add("Молоко", 40, 2);
+        basket.add("Coffee", 400, 1,0.5);
+        basket.add("Лопата",300,2,2);
         basket.print("Milk");
 
 
