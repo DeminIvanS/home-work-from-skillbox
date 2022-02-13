@@ -2,15 +2,15 @@ package ru.skillbox;
 
     public class Phone {
         private String model;
-        private String system;
+        private String operationSystem;
         private int cpu;
         private int ram;
 
         public Phone(String model, int cpu) {
             this.model = model;
-            this.system = system;
+
             this.cpu = cpu;
-            this.ram = ram;
+
         }
         public String getModel() {
             return model;
@@ -20,12 +20,12 @@ package ru.skillbox;
             this.model = model;
         }
 
-        public String getSystem() {
-            return system;
+        public String getOperationSystem() {
+            return operationSystem;
         }
 
-        public void setSystem(String system) {
-            this.system = system;
+        public void setOperationSystem(String system) {
+            this.operationSystem = operationSystem;
         }
 
         public int getCpu() {

@@ -11,8 +11,9 @@ public class Country {
         this.name = name;
         this.population = population;
         this.square = square;
-        this.capital = capital;
-        this.seaAccess = seaAccess;
+
+
+
     }
     public void setName(String name) {
         this.name = name;
