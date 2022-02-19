@@ -1,15 +1,22 @@
 package ru.skillbox;
 
 public class Cargo {
-    private final int volume;
     private final int weight;
     private final String address;
     private final String property;
+
     private final String ID;
     private final boolean delicate;
+    private Dimensions dimensions;
 
-    public Cargo(int volume, int weight, String address, String property, String ID, boolean delicate){
-        this.volume = volume;
+
+    public Cargo(Dimensions dimensions,
+                 int weight,
+                 String address,
+                 String property,
+                 String ID,
+                 boolean delicate){
+        this.dimensions = dimensions;
         this.weight = weight;
         this.address = address;
         this.property = property;
@@ -23,14 +30,31 @@ public class Cargo {
         return address;
     }
 
+    public Cargo setWeight(int weight) {
+        return new Cargo(dimensions, weight, address, property, ID,delicate);
+    }
+    public Cargo setAdress(String address) {
+        return new Cargo(dimensions, weight, address, property, ID,delicate);
+    }
+    public Cargo setProperty(String property) {
+        return new Cargo(dimensions, weight, address, property, ID,delicate);
+    }
+    public Cargo setID(String ID) {
+        return new Cargo(dimensions, weight, address, property, ID,delicate);
+    }
+    public Cargo setDelicate(boolean delicate) {
+        return new Cargo(dimensions, weight, address, property, ID,delicate);
+    }
+
     public String toString(){
 
-        return "объем " + volume + "куб.м" +
+        return "объем " + dimensions.dimensions() + "куб.м" +
                 "\nвес груза: " + weight + "кг" +
                 "\nАдрес доставки: " + address +
                 "\nсвойства груза: " + property +
                 "\nрегистрационный номер: " + ID +
                 "\nхрупкость:" + delicate;
     }
+
 }
 
