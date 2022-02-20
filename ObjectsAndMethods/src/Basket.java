@@ -1,67 +1,87 @@
 public class Basket {
 
-    private static int count = 0;
+    private static int countGoods = 0;
+    private static int totalCountGoods = 0;
+    private static int totalPriceGoods = 0;
+    private static int countBasket = 0;
+    private static double averagePriceBasket = 0;
+    private static double averagedPriceGoods = 0;
+
+    private double totalWeight = 0.0;
+    private int totalCountGoodsInBasket = 0;
     private String items = "";
     private int totalPrice = 0;
     private int limit;
-    private double totalWeight = 0.0;
+    private double averagePriceGoodsInBasket = 0;
+
+
 
     public Basket() {
-        increaseCount(1);
-        items = "Список товаров:";
-        this.limit = 1000000;
-
+    increaseCount(1);
+    countBasket = countBasket + 1;
+    items = "Список товаров:";
+    this.limit = 1000000;
     }
 
     public Basket(int limit) {
-        this();
         this.limit = limit;
     }
 
     public Basket(String items, int totalPrice) {
-        this();
         this.items = this.items + items;
         this.totalPrice = totalPrice;
     }
 
-    public static int getCount() {
-
-        return count;
+    public static int getCountGoods() {
+       return countGoods;
     }
+
+    public static int getCountBasket(){
+        return countBasket;
+        }
+
     public static void increaseCount(int count) {
-
-        Basket.count = Basket.count + count;
+        Basket.countGoods = Basket.countGoods + countGoods;
     }
+    public static double getAveragedPriceBasket() {
+        return averagePriceBasket = totalPriceGoods/countBasket;
+    }
+    public static double getAveragedPriceGoods(){
+        return averagedPriceGoods = (double) totalPriceGoods/totalCountGoods;
+    }
+
+
     public void add(String name, int price) {
 
         add(name, price, 1,0.0);
     }
-    public void add(String name, int price, int count) {
-        add(name, price,count,0.0);
+    public void add(String name, int price, int countGoods) {
+        add(name, price,countGoods,0.0);
 
     }
-    public void add(String name, int price, int count, double weight) {
+    public void add(String name, int price, int countGoods, double weight) {
         boolean error = false;
         if (contains(name)) {
             error = true;
         }
-
-        if (totalPrice + count * price >= limit) {
+        if (totalPrice + countGoods * price >= limit) {
             error = true;
         }
-
         if (error) {
             System.out.println("Error occured :(");
             return;
         }
-
         items = items + "\n" + name + " - " +
-                count + " шт. - " + price + "руб. - " + weight + "кг";
-
-        totalPrice = totalPrice + count * price;
-        totalWeight = totalWeight + weight * count;
+                countGoods + " шт. - " + price + "руб. - " + weight + "кг";
+        totalPrice = totalPrice + countGoods * price;
+        totalWeight = totalWeight + weight * countGoods;
+        totalCountGoodsInBasket = totalCountGoodsInBasket + countGoods;
+        totalCountGoods = totalCountGoods + countGoods;
+        totalPriceGoods = totalPriceGoods + countGoods * price;
+        averagePriceGoodsInBasket = totalPrice/totalCountGoodsInBasket;
 
     }
+
 
     public void clear() {
         items = "";
@@ -69,17 +89,7 @@ public class Basket {
         totalWeight = 0;
     }
 
-    public int getTotalPrice() {
-
-        return totalPrice;
-    }
-    public double getTotalWeight(){
-        return totalWeight;
-    }
-
-
     public boolean contains(String name) {
-
         return items.contains(name);
     }
 
@@ -89,9 +99,10 @@ public class Basket {
             System.out.println("Корзина пуста");
         } else {
             System.out.println(items);
-
         }
-        System.out.println("\nОбщая стоимость товаров: " + totalPrice +
-                "\nОбщий вес товаров: " + totalWeight);
+        System.out.println("\nОбщая стоимость товаров в корзине: " + totalPrice +
+                "\nОбщий вес товаров в корзине: " + totalWeight + "\nСредняя цена товара: " +
+                averagePriceGoodsInBasket + "\nКоличество товаров в корзине: " + totalCountGoodsInBasket);
     }
+
 }
