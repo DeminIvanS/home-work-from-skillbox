@@ -5,6 +5,7 @@ public class ArithmeticCalculator {
     private int result;
 
     public ArithmeticCalculator(Operation symbol) {
+
         this.symbol = symbol;
     }
     public Operation getSymbol() {
