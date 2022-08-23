@@ -4,8 +4,7 @@ import java.util.*;
 
 public class Company
         implements Employee {
-    static int totalIncome;
-    protected int income;
+    int totalIncome;
 
     private List<Employee> employeesList;
 
@@ -31,6 +30,11 @@ public class Company
     }
 
     public int getTotalIncome() {
+        for (Employee employee : employeesList) {
+            if (employee instanceof Manager) {
+                totalIncome += ((Manager) employee).getIncome();
+            }
+        }
         return totalIncome;
     }
 
@@ -61,11 +65,5 @@ public class Company
             result.add(employeesList.get(i));
         }
         return result;
-
     }
-
-    public String toString() {
-        return "" + getMonthSalary();
-    }
-
 }
