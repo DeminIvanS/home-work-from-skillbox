@@ -1,6 +1,6 @@
 package AbstractClasses.practice_2;
 
-public class AbstractClasses {
+public class Main {
     public static Company company = new Company();
 
     public static void main(String[] args) {
@@ -16,24 +16,26 @@ public class AbstractClasses {
                 company.hireEmployee(new TopManager());
             }
         }
+        System.out.println(company.getTotalIncome());
         System.out.println("Количество нанятых сотрудников " + company.getCountEmployees());
         System.out.println("Список самых высоких зарплат в компании: ");
         for (Employee employee : company.getTopSalaryStaff(15)) {
-            System.out.println(employee);
+            System.out.println(employee.getMonthSalary());
         }
         System.out.println("Список самых низких зарплат в компании: ");
         for (Employee employee : company.getLowestSalaryStaff(30)) {
-            System.out.println(employee);
+            System.out.println(employee.getMonthSalary());
         }
-        company.fireEmployee(company.getCountEmployees()/2);
+        company.fireEmployee(company.getCountEmployees() / 2);
 
         System.out.println("Количество нанятых сотрудников " + company.getCountEmployees());
-        for (Employee employee : company.getTopSalaryStaff(10)) {
-            System.out.println(employee);
-        }
         System.out.println("Список самых высоких зарплат в компании: ");
+        for (Employee employee : company.getTopSalaryStaff(10)) {
+            System.out.println(employee.getMonthSalary());
+        }
+        System.out.println("Список самых низких зарплат в компании: ");
         for (Employee employee : company.getLowestSalaryStaff(30)) {
-            System.out.println(employee);
+            System.out.println(employee.getMonthSalary());
         }
     }
 }

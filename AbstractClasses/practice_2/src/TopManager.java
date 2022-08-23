@@ -1,22 +1,19 @@
 package AbstractClasses.practice_2.src;
 
-import AbstractClasses.practice_2.src.Company;
-import AbstractClasses.practice_2.src.Employee;
+import static AbstractClasses.practice_2.src.Main.company;
 
-public class TopManager extends Company implements Employee {
+public class TopManager implements Employee {
     private static final double bonusSalary = 1.5;
     private static int fixSalary = 110000;
     private int salary;
 
     public TopManager() {
         salary = getMonthSalary();
-        income = getTotalIncome();
     }
-
 
     @Override
     public int getMonthSalary() {
-        if (totalIncome > 10_000_000) {
+        if (company.totalIncome > 1_000_000) {
             salary = (int) (fixSalary + fixSalary * bonusSalary);
 
         } else {
@@ -24,5 +21,4 @@ public class TopManager extends Company implements Employee {
         }
         return salary;
     }
-
 }
