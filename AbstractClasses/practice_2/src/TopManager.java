@@ -1,5 +1,6 @@
 package AbstractClasses.practice_2.src;
 
+
 import static AbstractClasses.practice_2.src.Main.company;
 
 public class TopManager implements Employee {

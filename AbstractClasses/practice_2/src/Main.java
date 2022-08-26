@@ -1,4 +1,4 @@
-package AbstractClasses.practice_2;
+package AbstractClasses.practice_2.src;
 
 public class Main {
     public static Company company = new Company();
