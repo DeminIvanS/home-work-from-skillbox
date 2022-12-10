@@ -1,18 +1,17 @@
 import jakarta.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Teachers")
 public class Teacher {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private  int id;
     private String name;
-
     private int salary;
-
     private int age;
+    @OneToMany(mappedBy="teacher")
+    private Collection<Course> courses;
 
     public int getId() {
         return id;
@@ -45,6 +44,4 @@ public class Teacher {
     public void setAge(int age) {
         this.age = age;
     }
-
-
 }

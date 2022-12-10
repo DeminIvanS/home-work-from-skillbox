@@ -1,38 +1,40 @@
 import jakarta.persistence.*;
 
+
+import java.util.List;
+
 @Entity
 @Table(name = "Courses")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
     private int duration;
-
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum")
+    @Column(columnDefinition = "enum('DESIGN', 'PROGRAMMING', 'MARKETING', 'MANAGEMENT', 'BUSINESS')")
     private CourseType type;
-
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
-
-    @Column(name = "student_count")
+    @Column(name = "students_count")
     private int studentCount;
 
+    private int price;
     @Column(name = "price_per_hour")
     private float pricePerHour;
-
-    private int price;
+    @ManyToMany
+    @JoinTable(name = "Subscriptions",
+    joinColumns = {@JoinColumn(name = "course_id")},
+    inverseJoinColumns = {@JoinColumn(name = "student_id")})
+    private List<Student> students;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -72,7 +74,7 @@ public class Course {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacherId) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 
@@ -100,10 +102,11 @@ public class Course {
         this.pricePerHour = pricePerHour;
     }
 
-
-
-
+    public List<Student> getStudents() {
+        return students;
     }
 
-
-
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+}

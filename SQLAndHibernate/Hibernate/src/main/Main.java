@@ -6,20 +6,20 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+
+
 public class Main {
     public static void main(String[] args) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("resources/hibernate.cfg.xml").build();
+                .configure("hibernate.cfg.xml")
+                .build();
         Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
 
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Course course = new Course();
-
-
-
+        transaction.commit();
         sessionFactory.close();
     }
 }
