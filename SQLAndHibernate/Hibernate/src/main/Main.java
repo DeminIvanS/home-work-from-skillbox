@@ -6,9 +6,12 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
+
     public static void main(String[] args) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml")
@@ -19,6 +22,28 @@ public class Main {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
+        String hqlStudents =
+                "From " + Student.class.getSimpleName();
+        List<Student> students = session.createQuery(hqlStudents).getResultList();
+        Map<String, Integer> mapStudents =
+                students.stream().collect(Collectors.toMap(Student::getName, Student::getId));
+
+        String hqlCourses =
+                "From " + Course.class.getSimpleName();
+        List<Course> courses = session.createQuery(hqlCourses).getResultList();
+        Map<String, Integer> mapCourses =
+                courses.stream().collect(Collectors.toMap(Course::getName, Course::getId));
+
+
+        String hqlPurchaseList =
+                "From " + PurchaseList.class.getSimpleName();
+        List<PurchaseList> purchaseList = session.createQuery(hqlPurchaseList).getResultList();
+        for (PurchaseList pl : purchaseList) {
+            LinkedPurchaseList linkedPurchase = new LinkedPurchaseList();
+            linkedPurchase.setStudentId(mapStudents.get(pl.getStudentName()));
+            linkedPurchase.setCourseId(mapCourses.get(pl.getCourseName()));
+            session.save(linkedPurchase);
+        }
         transaction.commit();
         sessionFactory.close();
     }

@@ -1,4 +1,5 @@
 import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -44,6 +45,4 @@ public class Student {
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
-
-
 }

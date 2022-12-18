@@ -18,8 +18,8 @@ public class Course {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
-    @Column(name = "students_count")
-    private int studentCount;
+   // @Column(name = "students_count")
+    //private int studentCount;
 
     private int price;
     @Column(name = "price_per_hour")
@@ -29,6 +29,8 @@ public class Course {
     joinColumns = {@JoinColumn(name = "course_id")},
     inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private List<Student> students;
+
+
 
     public int getId() {
         return id;
@@ -78,13 +80,13 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public int getStudentCount() {
-        return studentCount;
-    }
+   // public int getStudentCount() {
+   //     return studentCount;
+    //}
 
-    public void setStudentCount(int studentCount) {
-        this.studentCount = studentCount;
-    }
+    //public void setStudentCount(int studentCount) {
+       // this.studentCount = studentCount;
+    //}
 
     public int getPrice() {
         return price;

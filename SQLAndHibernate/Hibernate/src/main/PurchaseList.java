@@ -1,4 +1,3 @@
-
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -10,15 +9,15 @@ public class PurchaseList {
     @EmbeddedId
     private PurchaseListKey key;
 
-    @Column(name = "student_name", insertable = false,updatable = false)
-    private int studentName;
+    @Column(name = "student_name", insertable = false, updatable = false)
+    private String studentName;
 
-    @Column(name = "course_name", insertable = false,updatable = false)
-    private int courseName;
+    @Column(name = "course_name", insertable = false, updatable = false)
+    private String courseName;
 
-    @Column(columnDefinition = "int")
+
     private int price;
-    @Column(name = "subscription_date",columnDefinition = "datetime")
+    @Column(name = "subscription_date", columnDefinition = "datetime", nullable = false)
     private Date subscriptionDate;
 
     public PurchaseListKey getKey() {
@@ -29,19 +28,19 @@ public class PurchaseList {
         this.key = key;
     }
 
-    public int getStudentName() {
+    public String getStudentName() {
         return studentName;
     }
 
-    public void setStudentName(int studentName) {
+    public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
 
-    public int getCourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(int courseName) {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
@@ -66,4 +65,3 @@ public class PurchaseList {
     }
 
 }
-
