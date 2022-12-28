@@ -7,6 +7,8 @@ public class Bank {
     private Map<String, Account> accounts;
     private final Random random = new Random();
 
+
+
     public synchronized boolean isFraud(String fromAccountNum, String toAccountNum, long amount)
             throws InterruptedException {
         Thread.sleep(1000);
@@ -20,15 +22,18 @@ public class Bank {
      * усмотрение)
      */
     public void transfer(String fromAccountNum, String toAccountNum, long amount) {
-
+        Account fromAccount = accounts.get(fromAccountNum);
+        Account toAccount = accounts.get(toAccountNum);
         if(getBalance(fromAccountNum) > amount && accounts.get(fromAccountNum).getAccNumber().charAt(0) != '!' &&accounts.get(toAccountNum).getAccNumber().charAt(0) != '!'){
             if(amount > 50_000){
                 try {
                     boolean confirm = isFraud(fromAccountNum, toAccountNum, amount);
                     if(confirm){
-                        synchronized (accounts) {
+                        synchronized (fromAccount) {
+                            synchronized (toAccount){
                             accounts.get(fromAccountNum).setAccNumber("!" + fromAccountNum.toString());
                             accounts.get(toAccountNum).setAccNumber("!" + toAccountNum.toString());
+                            }
                         }
                     }
                 } catch (InterruptedException e) {
@@ -36,9 +41,11 @@ public class Bank {
                 }
 
             }
-            synchronized (accounts) {
-                accounts.get(toAccountNum).setMoney(accounts.get(toAccountNum).getMoney() + amount);
-                accounts.get(fromAccountNum).setMoney(accounts.get(fromAccountNum).getMoney() - amount);
+            synchronized (fromAccount) {
+                synchronized (toAccount) {
+                    accounts.get(toAccountNum).setMoney(accounts.get(toAccountNum).getMoney() + amount);
+                    accounts.get(fromAccountNum).setMoney(accounts.get(fromAccountNum).getMoney() - amount);
+                }
             }
 
 
