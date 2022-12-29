@@ -24,15 +24,29 @@ public class Bank {
     public void transfer(String fromAccountNum, String toAccountNum, long amount) {
         Account fromAccount = accounts.get(fromAccountNum);
         Account toAccount = accounts.get(toAccountNum);
+
+        Account lowSyncAccount;
+        Account topSyncAccount;
+        if(accounts.get(fromAccountNum).hashCode() > accounts.get(toAccountNum).hashCode()){
+            lowSyncAccount = toAccount;
+            topSyncAccount = fromAccount;
+        }else{
+            lowSyncAccount = fromAccount;
+            topSyncAccount = toAccount;
+        }
+
         if(getBalance(fromAccountNum) > amount && accounts.get(fromAccountNum).getAccNumber().charAt(0) != '!' &&accounts.get(toAccountNum).getAccNumber().charAt(0) != '!'){
             if(amount > 50_000){
                 try {
                     boolean confirm = isFraud(fromAccountNum, toAccountNum, amount);
                     if(confirm){
-                        synchronized (fromAccount) {
-                            synchronized (toAccount){
-                            accounts.get(fromAccountNum).setAccNumber("!" + fromAccountNum.toString());
-                            accounts.get(toAccountNum).setAccNumber("!" + toAccountNum.toString());
+                        if(fromAccountNum.equals(toAccountNum)){
+                            accounts.get(fromAccountNum).setAccNumber("!" + fromAccountNum);
+                        }
+                        synchronized (lowSyncAccount) {
+                            synchronized (topSyncAccount){
+                            accounts.get(fromAccountNum).setAccNumber("!" + fromAccountNum);
+                            accounts.get(toAccountNum).setAccNumber("!" + toAccountNum);
                             }
                         }
                     }
@@ -41,8 +55,8 @@ public class Bank {
                 }
 
             }
-            synchronized (fromAccount) {
-                synchronized (toAccount) {
+            synchronized (lowSyncAccount) {
+                synchronized (topSyncAccount) {
                     accounts.get(toAccountNum).setMoney(accounts.get(toAccountNum).getMoney() + amount);
                     accounts.get(fromAccountNum).setMoney(accounts.get(fromAccountNum).getMoney() - amount);
                 }

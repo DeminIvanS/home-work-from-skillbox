@@ -18,9 +18,9 @@ public class BankTest extends TestCase {
     }
     public void testTransfer(){
         List<Thread> threads = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             threads.add( new Thread(()-> {
-                for (int j = 0; j < 100; j++) {
+                for (int j = 0; j < 1000; j++) {
                     try{
                         bank.transfer("№" + ((int)(Math.random() * 1_000)),"№" +  (int) (Math.random() * 1_000),
                                 (int)(Math.random() * 60_000));
